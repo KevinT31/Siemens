@@ -89,3 +89,7 @@ The decision engine evaluates sensor values such as humidity, temperature, water
 ## Portfolio Notes
 
 This repository demonstrates integration between software control, sensor-oriented programming and machine learning for an automation/IoT use case.
+
+## Related Project
+
+This repository focuses on a compact irrigation-control implementation. The broader [`ControladorSistemaRiego`](https://github.com/KevinT31/ControladorSistemaRiego) variant adds cloud synchronization, cloud-oriented model training and synthetic-data tooling.
