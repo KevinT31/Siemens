@@ -1,95 +1,94 @@
+<div align="center">
+
 # Smart Irrigation Control System
 
-Intelligent irrigation prototype that combines sensor acquisition, actuator control, machine-learning-assisted decisions and operational monitoring.
+### Sensors · ML-Assisted Decisions · Actuator Control
+
+</div>
+
+---
 
 ## Overview
 
-This project implements a modular automatic irrigation system in Python. The application reads environmental and hydraulic variables, conditions sensor signals, evaluates irrigation needs and controls actuators through a central controller.
+Compact Python irrigation-control prototype that combines sensor acquisition, signal processing, machine-learning-assisted decisions and pump/valve control.
 
-A machine learning decision engine can be loaded from a serialized model. If the model is unavailable, the system falls back to threshold-based decision logic so the control flow can continue in simulation or degraded mode.
+A broader related implementation with cloud synchronization, cloud-oriented training and synthetic-data tooling is available in [ControladorSistemaRiego](https://github.com/KevinT31/ControladorSistemaRiego).
+
+## Control Flow
+
+~~~mermaid
+flowchart LR
+    Sensors --> Conditioning[Signal Conditioning]
+    Conditioning --> Decision[Decision Engine]
+    Decision --> Controller
+    Controller --> Actuators
+
+    Model[Serialized ML Model] --> Decision
+    Thresholds[Threshold Fallback] --> Decision
+~~~
 
 ## Main Components
 
-- Sensor acquisition and abstraction
-- Signal conditioning
-- Central irrigation controller
-- Machine learning decision engine
-- Threshold-based fallback logic
-- Pump and valve actuator management
-- Model training utilities
-- Graphical interface
-- Automated tests
-- Cloud-related integration dependencies
+- sensor abstraction
+- signal conditioning
+- central controller
+- ML decision engine
+- threshold-based fallback
+- pump/valve actuator logic
+- model-training utilities
+- GUI
+- tests
 
 ## Tech Stack
 
-- Python
-- pandas / NumPy
-- scikit-learn
-- Flask
-- Google Cloud libraries
-- Adafruit sensor libraries
-- Modbus
-- Matplotlib
+Python · pandas · NumPy · scikit-learn · Flask · Google Cloud libraries · Adafruit libraries · Modbus · Matplotlib
 
-## Project Structure
+## Repository Structure
 
-```text
+~~~text
 .
-├── config/                 # Configuration files
-├── data/                   # Local data used by the project
-├── docs/                   # Supporting documentation
-├── lib/                    # Additional project libraries
-├── scripts/                # Utility scripts
+├── config/
+├── data/
+├── docs/
+├── lib/
+├── scripts/
 ├── src/
-│   ├── main.py             # Main application entry point
-│   ├── controller.py       # Irrigation system orchestration
-│   ├── sensors.py          # Sensor acquisition
+│   ├── main.py
+│   ├── controller.py
+│   ├── sensors.py
 │   ├── signal_conditioning.py
-│   ├── decision_engine.py  # ML and rule-based decisions
-│   ├── actuators.py        # Pump/valve control
-│   ├── model_training.py   # Model training utilities
-│   └── gui.py              # User interface
-├── tests/                  # Test suite
-├── modelo_actualizado.pkl  # Serialized model
+│   ├── decision_engine.py
+│   ├── actuators.py
+│   ├── model_training.py
+│   └── gui.py
+├── tests/
+├── modelo_actualizado.pkl
 └── requirements.txt
-```
+~~~
 
-## Getting Started
+## Run Locally
 
-### Requirements
-
-- Python 3
-- A virtual environment is recommended
-
-### Installation
-
-```bash
+~~~bash
 git clone https://github.com/KevinT31/Siemens.git
 cd Siemens
+
 python -m venv .venv
-```
+# activate the virtual environment
 
-Activate the environment and install dependencies:
-
-```bash
 pip install -r requirements.txt
-```
-
-Run the application from the project root:
-
-```bash
 python src/main.py
-```
+~~~
 
-## Decision Logic
+## Degraded / Fallback Behavior
 
-The decision engine evaluates sensor values such as humidity, temperature, water level and flow rate. When a trained model is available, it is used to support irrigation decisions. When it is not available, the application applies predefined thresholds as a fallback.
+If a trained model is unavailable, the decision engine can continue using predefined thresholds. This keeps the control path testable and avoids making the entire prototype depend on one serialized artifact.
 
-## Portfolio Notes
+## Scope
 
-This repository demonstrates integration between software control, sensor-oriented programming and machine learning for an automation/IoT use case.
+This is a compact automation/IoT prototype. It is useful for demonstrating system integration, but it should not be treated as a production-certified irrigation controller.
 
-## Related Project
+---
 
-This repository focuses on a compact irrigation-control implementation. The broader [`ControladorSistemaRiego`](https://github.com/KevinT31/ControladorSistemaRiego) variant adds cloud synchronization, cloud-oriented model training and synthetic-data tooling.
+### What this project demonstrates
+
+**Sensor-oriented Python · ML fallback design · actuator control · automation architecture**
